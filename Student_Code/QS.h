@@ -1,10 +1,13 @@
 #pragma once
 
+#include <sstream>
 #include "QSInterface.h"
 
 class QS : public QSInterface {
 private:
     int* _A = NULL;
+    int _size; //how many elements are currently in the array
+    int _capacity; //the maximum size of the dynamically created aray
     
 public:
     QS();

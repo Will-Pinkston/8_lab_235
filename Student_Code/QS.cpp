@@ -3,7 +3,9 @@
 
 
 
-QS::QS(){}
+QS::QS() {
+    _size = 0;
+}
 
 void QS::sortAll() {}
 
@@ -16,45 +18,66 @@ int QS::partition(int left, int right, int pivotIndex) {
 }
 
 string QS::getArray() {
-    return "";
+    
+    stringstream ss;
+    for (int i = 0; i < _size; i++)
+    {
+        ss << _A[i];
+        if (i != _size - 1)
+        {
+            ss << ",";
+        }
+    }
+    
+    /*
+     * Produces a comma delimited string representation of the array. For example: if my array
+     * looked like {5,7,2,9,0}, then the string to be returned would look like "5,7,2,9,0"
+     * with no trailing comma.  The number of cells included equals the number of values added.
+     * Do not include the entire array if the array has yet to be filled.
+     *
+     * Returns an empty string, if the array is NULL or empty.
+     *
+     * @return
+     *		the string representation of the current array
+     */
+    return ss.str();
 }
 
 int QS::getSize() {
-    return -1;
+    return _size;
 }
 
 void QS::addToArray(int value) {
+    if (_size < _capacity)
+    {
+        _A[_size] = value;
+        _size++;
+    }
     return;
 }
+
+//---------------------------------------------------
+//---------------------------------------------------
 
 bool QS::createArray(int capacity) {
     if (capacity <= 0) return false;
     
-    if (_A != NULL)
+    else
     {
-        //delete current array
-        delete _A;
+        if (_A != NULL)
+        {
+            //delete current array
+            delete _A;
+        }
+        //create new aray
+        _A = new int [capacity];
+        _capacity = capacity;
+        return true;
     }
-    
-    //create new aray
-    _A = new int [capacity];
-    
-    
-    /*
-     * Dynamically allocates an array with the given capacity.
-     * If a previous array had been allocated, delete the previous array.
-     * Returns false if the given capacity is non-positive, true otherwise.
-     *
-     * @param
-     *		size of array
-     * @return
-     *		true if the array was created, false otherwise
-     */
-    return false;
 }
 
 void QS::clear() {
-    delete[] _A; //are the brackets important?
+    delete _A; //are the brackets important? should it be "delete[] _A;" ?
     _A = NULL;
     
     return;
