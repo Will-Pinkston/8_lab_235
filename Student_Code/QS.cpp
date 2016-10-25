@@ -92,7 +92,7 @@ void QS::clear() {
     cout << "clear()" << endl;
     delete[] _A; //are the brackets important? should it be "delete[] _A;" ?
     _A = NULL;
-    
+    _size = 0;
     return;
 }
 
