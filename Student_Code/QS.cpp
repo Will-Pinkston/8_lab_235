@@ -7,17 +7,25 @@ QS::QS() {
     _size = 0;
 }
 
-void QS::sortAll() {}
+void QS::sortAll() {
+    cout << "sortAll()" << endl;
+}
 
 int QS::medianOfThree(int left, int right) {
+    cout << "medianOfThree(left: " << left << ", right: " << right << ")" << endl;
     return -1;
 }
 
 int QS::partition(int left, int right, int pivotIndex) {
+    cout << "partition(left: " << left << ", right: " << right << ", pivotIndex: " << pivotIndex << ")" << endl;
     return -1;
 }
 
+//---------------------------------------------------
+//---------------------------------------------------
+
 string QS::getArray() {
+    cout << "getArray()" << endl;
     
     stringstream ss;
     for (int i = 0; i < _size; i++)
@@ -44,10 +52,12 @@ string QS::getArray() {
 }
 
 int QS::getSize() {
+    cout << "getSize()" << endl;
     return _size;
 }
 
 void QS::addToArray(int value) {
+    cout << "addToArray(value: " << value << ")" << endl;
     if (_size < _capacity)
     {
         _A[_size] = value;
@@ -56,10 +66,8 @@ void QS::addToArray(int value) {
     return;
 }
 
-//---------------------------------------------------
-//---------------------------------------------------
-
 bool QS::createArray(int capacity) {
+    cout << "createArray(capacity: " << capacity << ")" << endl;
     if (capacity <= 0) return false;
     
     else
@@ -81,6 +89,7 @@ bool QS::createArray(int capacity) {
 }
 
 void QS::clear() {
+    cout << "clear()" << endl;
     delete[] _A; //are the brackets important? should it be "delete[] _A;" ?
     _A = NULL;
     
