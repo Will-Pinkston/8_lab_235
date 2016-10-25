@@ -70,14 +70,18 @@ bool QS::createArray(int capacity) {
             delete _A;
         }
         //create new aray
-        _A = new int [capacity];
+        _A = new int[capacity];
+        for (int i = 0; i < capacity; i++)
+        {
+            _A[i] = 0; //initialize all values of the new array
+        }
         _capacity = capacity;
         return true;
     }
 }
 
 void QS::clear() {
-    delete _A; //are the brackets important? should it be "delete[] _A;" ?
+    delete[] _A; //are the brackets important? should it be "delete[] _A;" ?
     _A = NULL;
     
     return;
