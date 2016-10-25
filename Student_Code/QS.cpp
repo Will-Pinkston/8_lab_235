@@ -2,12 +2,12 @@
 #include "QS.h"
 
 
-
+//////
 QS::QS() {
     _size = 0;
 }
-
-void sortItR(int left, int right, QS* myQS) { //can this be void?
+//////
+void sortItR(int left, int right, QS* myQS) {
     if (left == right)
     {
         return;
@@ -32,36 +32,18 @@ void sortItR(int left, int right, QS* myQS) { //can this be void?
     sortItR(left, partitionMid - 1, myQS);
     sortItR(partitionMid + 1, right, myQS);
     return;
-    
-//    int pivotI = myQS->partition(left, right, myQS->medianOfThree(left, right));
-//    return sortItR(left, pivotI-1, myQS) + sortItR(pivotI+1, right, myQS);
 }
-
+//////
 void QS::sortAll() {
-    cout << "sortAll()" << endl;
+//    cout << "sortAll()" << endl;
     if (_A == NULL) return;
     int left = 0;
     int right = _size - 1;
-//    cout << partition(left, right, medianOfThree(left, right)) << endl;
     sortItR(left, right, this);
-    /*
-     * sortAll()
-     *
-     * Sorts elements of the array.  After this function is called, every
-     * element in the array is less than or equal its successor.
-     *
-     * Does nothing if the array is empty.
-     */
 }
-
-
-
-
-//---------------------------------------------------
-//---------------------------------------------------
-
+//////
 int QS::medianOfThree(int left, int right) {
-    cout << "medianOfThree(left: " << left << ", right: " << right << ")" << endl;
+//    cout << "medianOfThree(left: " << left << ", right: " << right << ")" << endl;
     //fail cases
     if (_A == NULL) return -1;
     if (left < 0 || right > _size - 1) return -1;
@@ -93,7 +75,7 @@ int QS::medianOfThree(int left, int right) {
 }
 //////
 int QS::partition(int left, int right, int pivotIndex) {
-    cout << "partition(left: " << left << ", right: " << right << ", pivotIndex: " << pivotIndex << ")" << endl;
+//    cout << "partition(left: " << left << ", right: " << right << ", pivotIndex: " << pivotIndex << ")" << endl;
     //check fail cases
     if (_A == NULL) return -1;
     if (left < 0 || right > _size - 1) return -1;
@@ -112,8 +94,6 @@ int QS::partition(int left, int right, int pivotIndex) {
     bool terminus_sort = false;
     while(!terminus_sort)
     {
-//        cout << getArray() << endl;
-//        cout << endl << endl;
         bool loFound = false;
         bool hiFound = false;
         while (!(loFound && hiFound))
@@ -123,26 +103,20 @@ int QS::partition(int left, int right, int pivotIndex) {
             if (_A[hiIndex] >  pivot) hiIndex--;
             else hiFound = true;
         }
-        //if hiIndex < loIndex, swap hiIndex and the pivot
-        //else swap _A[hi] with _A[lo], increment loIndex and decrement hiIndex
         if (hiIndex < loIndex)
         {
-            //
             temp = _A[hiIndex];
             _A[hiIndex] = pivot;
             _A[left] = temp;
             terminus_sort = true;
-            //swap _A[hiIndex] with the pivot
         }
         else
         {
-            //
             temp = _A[hiIndex];
             _A[hiIndex] = _A[loIndex];
             _A[loIndex] = temp;
             hiIndex--;
             loIndex++;
-            //swap _A[hi] with _A[lo], increment loIndex and decrement hiIndex
         }
     }
     
@@ -158,18 +132,6 @@ string QS::getArray() {
         ss << _A[i];
         if (i != _size - 1) ss << ",";
     }
-    
-    /*
-     * Produces a comma delimited string representation of the array. For example: if my array
-     * looked like {5,7,2,9,0}, then the string to be returned would look like "5,7,2,9,0"
-     * with no trailing comma.  The number of cells included equals the number of values added.
-     * Do not include the entire array if the array has yet to be filled.
-     *
-     * Returns an empty string, if the array is NULL or empty.
-     *
-     * @return
-     *		the string representation of the current array
-     */
     return ss.str();
 }
 //////
@@ -196,14 +158,12 @@ bool QS::createArray(int capacity) {
     {
         if (_A != NULL)
         {
-            //delete current array
             delete[] _A;
         }
-        //create new aray
         _A = new int[capacity];
         for (int i = 0; i < capacity; i++)
         {
-            _A[i] = 0; //initialize all values of the new array
+            _A[i] = 0;
         }
         _capacity = capacity;
         return true;
@@ -212,7 +172,7 @@ bool QS::createArray(int capacity) {
 //////
 void QS::clear() {
     cout << "clear()" << endl;
-    delete[] _A; //are the brackets important? should it be "delete[] _A;" ?
+    delete[] _A;
     _A = NULL;
     _size = 0;
     return;
