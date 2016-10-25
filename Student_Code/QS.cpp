@@ -7,25 +7,66 @@ QS::QS() {
     _size = 0;
 }
 
+void sortItR(int left, int right, QS* myQS) { //can this be void?
+    if (left == right)
+    {
+        return;
+    }
+    if ((right - left) == 1)
+    {
+        if (myQS->_A[left] > myQS->_A[right])
+        {
+            int temp = myQS->_A[right];
+            myQS->_A[right] = myQS->_A[left];
+            myQS->_A[left] = temp;
+        }
+        return;
+    }
+    if ((right - left) == 2)
+    {
+        myQS->medianOfThree(left, right);
+        return;
+    }
+    int pivot = myQS->medianOfThree(left, right);
+    int partitionMid = myQS->partition(left, right, pivot);
+    sortItR(left, partitionMid - 1, myQS);
+    sortItR(partitionMid + 1, right, myQS);
+    return;
+    
+//    int pivotI = myQS->partition(left, right, myQS->medianOfThree(left, right));
+//    return sortItR(left, pivotI-1, myQS) + sortItR(pivotI+1, right, myQS);
+}
+
 void QS::sortAll() {
     cout << "sortAll()" << endl;
+    if (_A == NULL) return;
+    int left = 0;
+    int right = _size - 1;
+//    cout << partition(left, right, medianOfThree(left, right)) << endl;
+    sortItR(left, right, this);
+    /*
+     * sortAll()
+     *
+     * Sorts elements of the array.  After this function is called, every
+     * element in the array is less than or equal its successor.
+     *
+     * Does nothing if the array is empty.
+     */
 }
+
+
+
+
+//---------------------------------------------------
+//---------------------------------------------------
 
 int QS::medianOfThree(int left, int right) {
     cout << "medianOfThree(left: " << left << ", right: " << right << ")" << endl;
     //fail cases
-    if (_A == NULL)
-    {
-        return -1;
-    }
-    if (left < 0 || right > _size - 1)
-    {
-        return -1;
-    }
-    if (left >= right)
-    {
-        return -1;
-    }
+    if (_A == NULL) return -1;
+    if (left < 0 || right > _size - 1) return -1;
+    if (left >= right) return -1;
+    
     int middle = (left + right) / 2;
     int temp;
     //bubble sort three indicies
@@ -50,29 +91,14 @@ int QS::medianOfThree(int left, int right) {
     
     return middle;
 }
-
-//---------------------------------------------------
-//---------------------------------------------------
-
+//////
 int QS::partition(int left, int right, int pivotIndex) {
     cout << "partition(left: " << left << ", right: " << right << ", pivotIndex: " << pivotIndex << ")" << endl;
     //check fail cases
-    if (_A == NULL)
-    {
-        return -1;
-    }
-    if (left < 0 || right > _size - 1)
-    {
-        return -1;
-    }
-    if (left > pivotIndex || right < pivotIndex)
-    {
-        return -1;
-    }
-    if (left >= right)
-    {
-        return -1;
-    }
+    if (_A == NULL) return -1;
+    if (left < 0 || right > _size - 1) return -1;
+    if (left > pivotIndex || right < pivotIndex) return -1;
+    if (left >= right) return -1;
     
     int loIndex = left; int hiIndex = right;
     int temp;
@@ -86,11 +112,8 @@ int QS::partition(int left, int right, int pivotIndex) {
     bool terminus_sort = false;
     while(!terminus_sort)
     {
-        for (int i = 0; i < _size; i++)
-        {
-            cout << _A[i] << endl;
-        }
-        cout << endl << endl;
+//        cout << getArray() << endl;
+//        cout << endl << endl;
         bool loFound = false;
         bool hiFound = false;
         while (!(loFound && hiFound))
@@ -125,7 +148,7 @@ int QS::partition(int left, int right, int pivotIndex) {
     
     return hiIndex;
 }
-
+//////
 string QS::getArray() {
     cout << "getArray()" << endl;
     
@@ -133,10 +156,7 @@ string QS::getArray() {
     for (int i = 0; i < _size; i++)
     {
         ss << _A[i];
-        if (i != _size - 1)
-        {
-            ss << ",";
-        }
+        if (i != _size - 1) ss << ",";
     }
     
     /*
@@ -152,12 +172,12 @@ string QS::getArray() {
      */
     return ss.str();
 }
-
+//////
 int QS::getSize() {
     cout << "getSize()" << endl;
     return _size;
 }
-
+//////
 void QS::addToArray(int value) {
     cout << "addToArray(value: " << value << ")" << endl;
     if (_size < _capacity)
@@ -167,7 +187,7 @@ void QS::addToArray(int value) {
     }
     return;
 }
-
+//////
 bool QS::createArray(int capacity) {
     cout << "createArray(capacity: " << capacity << ")" << endl;
     if (capacity <= 0) return false;
@@ -189,7 +209,7 @@ bool QS::createArray(int capacity) {
         return true;
     }
 }
-
+//////
 void QS::clear() {
     cout << "clear()" << endl;
     delete[] _A; //are the brackets important? should it be "delete[] _A;" ?
@@ -197,7 +217,7 @@ void QS::clear() {
     _size = 0;
     return;
 }
-
+//////
 
 
 
