@@ -129,7 +129,10 @@ int QS::partition(int left, int right, int pivotIndex) {
 //////
 string QS::getArray() {
 //    cout << "getArray()" << endl;
-    
+    if (_A == NULL)
+    {
+        return "";
+    }
     stringstream ss;
     for (int i = 0; i < _size; i++)
     {
@@ -146,6 +149,10 @@ int QS::getSize() {
 //////
 void QS::addToArray(int value) {
 //    cout << "addToArray(value: " << value << ")" << endl;
+    if (_A == NULL)
+    {
+        return;
+    }
     if (_size < _capacity)
     {
         _A[_size] = value;
@@ -176,6 +183,10 @@ bool QS::createArray(int capacity) {
 //////
 void QS::clear() {
 //    cout << "clear()" << endl;
+    if (_A == NULL)
+    {
+        return;
+    }
     delete[] _A;
     _A = NULL;
     _size = 0;
