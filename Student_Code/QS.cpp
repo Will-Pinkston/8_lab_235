@@ -75,7 +75,7 @@ bool QS::createArray(int capacity) {
         if (_A != NULL)
         {
             //delete current array
-            delete _A;
+            delete[] _A;
         }
         //create new aray
         _A = new int[capacity];
