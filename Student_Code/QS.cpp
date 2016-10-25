@@ -7,6 +7,10 @@ QS::QS() {
     _size = 0;
 }
 //////
+QS::~QS() {
+    clear();
+}
+//////
 void sortItR(int left, int right, QS* myQS) {
     if (left == right)
     {

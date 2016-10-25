@@ -10,7 +10,7 @@ public:
     int _capacity; //the maximum size of the dynamically created aray
     
     QS();
-    
+    ~QS();
     void sortAll();
     int medianOfThree(int left, int right);
     int partition(int left, int right, int pivotIndex);
