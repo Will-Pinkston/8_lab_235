@@ -13,16 +13,118 @@ void QS::sortAll() {
 
 int QS::medianOfThree(int left, int right) {
     cout << "medianOfThree(left: " << left << ", right: " << right << ")" << endl;
-    return -1;
+    //fail cases
+    if (_A == NULL)
+    {
+        return -1;
+    }
+    if (left < 0 || right > _size - 1)
+    {
+        return -1;
+    }
+    if (left >= right)
+    {
+        return -1;
+    }
+    int middle = (left + right) / 2;
+    int temp;
+    //bubble sort three indicies
+    if (_A[left] > _A[middle])
+    {
+        temp = _A[middle];
+        _A[middle] = _A[left];
+        _A[left] = temp;
+    }
+    if (_A[middle] > _A[right])
+    {
+        temp = _A[right];
+        _A[right] = _A[middle];
+        _A[middle] = temp;
+    }
+    if (_A[left] > _A[middle])
+    {
+        temp = _A[middle];
+        _A[middle] = _A[left];
+        _A[left] = temp;
+    }
+    
+    return middle;
 }
+
+//---------------------------------------------------
+//---------------------------------------------------
 
 int QS::partition(int left, int right, int pivotIndex) {
     cout << "partition(left: " << left << ", right: " << right << ", pivotIndex: " << pivotIndex << ")" << endl;
-    return -1;
+    //check fail cases
+    if (_A == NULL)
+    {
+        return -1;
+    }
+    if (left < 0 || right > _size - 1)
+    {
+        return -1;
+    }
+    if (left > pivotIndex || right < pivotIndex)
+    {
+        return -1;
+    }
+    if (left >= right)
+    {
+        return -1;
+    }
+    
+    int loIndex = left; int hiIndex = right;
+    int temp;
+    int pivot = _A[pivotIndex];
+    //place pivot
+    temp = _A[loIndex];
+    _A[loIndex] = _A[pivotIndex];
+    _A[pivotIndex] = temp;
+    loIndex++;
+    //sort-check lo values
+    bool terminus_sort = false;
+    while(!terminus_sort)
+    {
+        for (int i = 0; i < _size; i++)
+        {
+            cout << _A[i] << endl;
+        }
+        cout << endl << endl;
+        bool loFound = false;
+        bool hiFound = false;
+        while (!(loFound && hiFound))
+        {
+            if (_A[loIndex] <= pivot) loIndex++;
+            else loFound = true;
+            if (_A[hiIndex] >  pivot) hiIndex--;
+            else hiFound = true;
+        }
+        //if hiIndex < loIndex, swap hiIndex and the pivot
+        //else swap _A[hi] with _A[lo], increment loIndex and decrement hiIndex
+        if (hiIndex < loIndex)
+        {
+            //
+            temp = _A[hiIndex];
+            _A[hiIndex] = pivot;
+            _A[left] = temp;
+            terminus_sort = true;
+            //swap _A[hiIndex] with the pivot
+        }
+        else
+        {
+            //
+            temp = _A[hiIndex];
+            _A[hiIndex] = _A[loIndex];
+            _A[loIndex] = temp;
+            hiIndex--;
+            loIndex++;
+            //swap _A[hi] with _A[lo], increment loIndex and decrement hiIndex
+        }
+    }
+    
+    return hiIndex;
 }
-
-//---------------------------------------------------
-//---------------------------------------------------
 
 string QS::getArray() {
     cout << "getArray()" << endl;
