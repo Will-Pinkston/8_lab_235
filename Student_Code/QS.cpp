@@ -41,11 +41,11 @@ void sortItR(int left, int right, QS* myQS) {
     }
     int pivot = myQS->medianOfThree(left, right);
     int partitionMid = myQS->partition(left, right, pivot);
-    cout << myQS->getArray() << endl << endl;
+//    cout << myQS->getArray() << endl << endl;
     sortItR(left, partitionMid - 1, myQS);
-    cout << myQS->getArray() << endl << endl;
+//    cout << myQS->getArray() << endl << endl;
     sortItR(partitionMid + 1, right, myQS);
-    cout << myQS->getArray() << endl << endl;
+//    cout << myQS->getArray() << endl << endl;
     return;
 }
 //////
