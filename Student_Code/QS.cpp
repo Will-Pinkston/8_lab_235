@@ -54,7 +54,7 @@ void QS::sortAll() {
     if (_A == NULL) return;
     int left = 0;
     int right = _size - 1;
-    cout << getArray() << endl;
+//    cout << getArray() << endl;
     sortItR(left, right, this);
 }
 //////
