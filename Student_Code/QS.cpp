@@ -122,6 +122,10 @@ int QS::partition(int left, int right, int pivotIndex) {
                 if (_A[hiIndex] >  pivot) hiIndex--;
                 else hiFound = true;
             }
+            else
+            {
+                if (hiIndex == 39) loFound = true;
+            }
         }
         if (hiIndex < loIndex)
         {
