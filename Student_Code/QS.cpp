@@ -119,10 +119,13 @@ int QS::partition(int left, int right, int pivotIndex) {
         bool hiFound = false;
         while (!(loFound && hiFound))
         {
-            if (_A[loIndex] <= pivot) loIndex++;
-            else loFound = true;
-            if (_A[hiIndex] >  pivot) hiIndex--;
-            else hiFound = true;
+            if (loIndex < _size)
+            {
+                if (_A[loIndex] <= pivot) loIndex++;
+                else loFound = true;
+                if (_A[hiIndex] >  pivot) hiIndex--;
+                else hiFound = true;
+            }
         }
         if (hiIndex < loIndex)
         {
