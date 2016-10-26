@@ -16,10 +16,6 @@ void sortItR(int left, int right, QS* myQS) {
     {
         return;
     }
-    if (right == myQS->_size)
-    {
-        return;
-    }
     if (right == -1)
     {
         return;
@@ -119,7 +115,7 @@ int QS::partition(int left, int right, int pivotIndex) {
         bool hiFound = false;
         while (!(loFound && hiFound))
         {
-            if (loIndex <= _size)
+            if (loIndex < _size)
             {
                 if (_A[loIndex] <= pivot) loIndex++;
                 else loFound = true;
