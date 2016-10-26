@@ -16,6 +16,10 @@ void sortItR(int left, int right, QS* myQS) {
     {
         return;
     }
+    if (right == myQS->_size)
+    {
+        return;
+    }
     if (right == -1)
     {
         return;
@@ -39,7 +43,8 @@ void sortItR(int left, int right, QS* myQS) {
         myQS->medianOfThree(left, right);
         return;
     }
-    int pivot = myQS->medianOfThree(left, right);
+    int pivot;
+    if (left != myQS->_size + 1) pivot = myQS->medianOfThree(left, right);
     int partitionMid = myQS->partition(left, right, pivot);
 //    cout << myQS->getArray() << endl << endl;
     sortItR(left, partitionMid - 1, myQS);
