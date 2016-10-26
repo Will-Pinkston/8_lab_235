@@ -12,14 +12,14 @@ QS::~QS() {
 }
 //////
 void sortItR(int left, int right, QS* myQS) {
-    if (left > right)
-    {
-        return;
-    }
-//    if (left == -1)
+//    if (left > right)
 //    {
 //        return;
 //    }
+    if (left == -1)
+    {
+        return;
+    }
     if (left == right)
     {
         return;
